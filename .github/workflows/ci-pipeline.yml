@@ -1,7 +1,9 @@
 name: Python test and build
+
 on: [push]
+
 jobs:
-test:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,12 +25,12 @@ test:
         with:
           name: test-results
           path: junit/test-results.xml
-build:
- needs: test
- permissions:
+          build:
+needs: test
+permissions:
     id-token: write    
-   runs-on: ubuntu-latest
- steps:
+runs-on: ubuntu-latest
+steps:
     - name: Set up QEMU
     uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
@@ -42,5 +44,4 @@ build:
     uses: docker/build-push-action@v5
     with:     
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest  
-
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
