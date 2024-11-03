@@ -113,7 +113,7 @@ jobs:
                 name: zap-report
                 path: report_json.json
   build:
-    needs: sonarqube
+    needs: [sonarqube,dast]
     permissions:
       id-token: write    
     runs-on: ubuntu-latest
