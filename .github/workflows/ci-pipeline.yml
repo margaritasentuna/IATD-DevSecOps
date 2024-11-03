@@ -132,7 +132,7 @@ jobs:
                 name: zap-report
                 path: report_json.json
   build:
-    needs: [sonarqube,dast]
+    needs: [security_gate]
     if: false
     permissions:
       id-token: write    
@@ -153,7 +153,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
   submit_reports:
-   needs: [test, sonarqube, dast]
+   needs: [sonarqube, dast, image-scan]
    if: true
    runs-on: ubuntu-latest
    steps:
