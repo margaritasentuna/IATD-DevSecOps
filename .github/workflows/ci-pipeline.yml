@@ -34,7 +34,7 @@ jobs:
           uses: anchore/scan-action@v3
           id: image-scan
           with:
-            image: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
+            image: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs
             fail-build: false
             output-format: json
         - name: Upload Image report
@@ -132,7 +132,7 @@ jobs:
                 name: zap-report
                 path: report_json.json
   build:
-    needs: []
+    needs: [test,dast,sonarqube,image-scan]
     if: true
     permissions:
       id-token: write    
