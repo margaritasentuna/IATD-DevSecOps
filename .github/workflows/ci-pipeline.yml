@@ -132,8 +132,8 @@ jobs:
                 name: zap-report
                 path: report_json.json
   build:
-    needs: [security_gate]
-    if: false
+    needs: []
+    if: true
     permissions:
       id-token: write    
     runs-on: ubuntu-latest
@@ -150,6 +150,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:     
+          sbom: true
+          provenance: true
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
   submit_reports:
