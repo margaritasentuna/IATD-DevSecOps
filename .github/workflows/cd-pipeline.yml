@@ -11,7 +11,7 @@ jobs:
 
     - name: Verify image signature
       env:
-        IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs
+        IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/devops-labs:latest
         GITHUB_ISSUER: https://token.actions.githubusercontent.com
         CERT_IDENTITY_REGEXP: https://github.com/.*/margaritasentuna/IATD-DevSecOps/.github/workflows/ci-pipeline.yml.*
       run: |
